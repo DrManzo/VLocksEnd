@@ -116,6 +116,8 @@ Module Module1
 
     'this is the definition of what the CreateProjectFolder function does - it is the function used within the Sub above
     'the things in the parenthesis are the arguments = the things that the function is working with/on. Notice that the data type neeeds to be read as.
+    ' Abraham this is a test what can you see? 
+    
     Sub CreateProjectFolder(newFolderPath As String, WeekNumber As String)
         'this says: create a directory in My Computer's File System that combines folders within the newFolderPath Variable Starting with the Variable WeekNumber
         My.Computer.FileSystem.CreateDirectory(newFolderPath + "\" + WeekNumber)
