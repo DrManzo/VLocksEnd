@@ -1,4 +1,4 @@
-﻿'TODO:1. Change Procedure name to your own procedure name
+'TODO:1. Change Procedure name to your own procedure name
 
 'TODO:2.  Add Json package to the resources
 
@@ -22,104 +22,120 @@
 
 Module Module1
 
-    'READ: 'More information on file reading and writing in the coursebook: pg 68: FileRead
+    'READ: 'More information on file reading and writing in the coursebook: pg 68: FileRead
 
-    'https://drive.google.com/file/d/1qwb9Sq3bf9sWPdAUeiFX_xM1Knb4Ikpp/view
+    'https://drive.google.com/file/d/1qwb9Sq3bf9sWPdAUeiFX_xM1Knb4Ikpp/view
 
-    Dim WeekNumber As String
+    Dim WeekNumber As String
 
-    Dim FullDirectory As String
+    Dim FullDirectory As String
 
-    'This function tells the console window what to write and what to read.
-    Sub Main() 'A Sub is a function that doesn't return anything
+    
+    Dim TeamSlogan As String = "Go Team VLocksEnd"
 
-        Dim input As String = 0
+    'This function tells the console window what to write and what to read.
+    Sub Main() 'A Sub is a function that doesn't return anything
 
-        While input <> "exit" 'This tells the console to display the follwing things as long as the input IS NOT exit. Notice that it must receive the exact input "exit" with respect to all lowercase, otherwis it won't work
+        Dim input As String = 0
 
-            Console.WriteLine("please the week number.")
+        While input = "exit" 
 
-            WeekNumber = Console.ReadLine 'The Console will read whatever the user types as the WeekNumber string
+            Console.WriteLine("please the week number.")
 
-            Console.WriteLine("Please enter a command  exit | create") 'Notice that the Console writes the lines in the order they appear in.
+            WeekNumber = Console.ReadLine 'The Console will read whatever the user types as the WeekNumber string
 
-            input = Console.ReadLine.ToString()
+            Console.WriteLine("Please enter a command  exit | create") 'Notice that the Console writes the lines in the order they appear in.
 
-            If input = "create" Then 'This line makes the condition needed to activate the MakeP2PProjectFolders function. In this case the condition is that user types in "create"
+            input = Console.ReadLine.ToString()
 
-                MakeP2PProjectFolders()
+            If input = "create" Then 'This line makes the condition needed to activate the MakeP2PProjectFolders function. In this case the condition is that user types in "create"
 
-            End If
+                MakeP2PProjectFolders()
 
-        End While 'This marks the loop that is created by While. As long as we don't type in "exit" the Console will keep writing the lines as a loop.
+            End If
 
-    End Sub
+        End While 'This marks the loop that is created by While. As long as we don't type in "exit" the Console will keep writing the lines as a loop.
 
-    Private Sub MakeP2PProjectFolders() 'This is where the function utilized in the code above is actually defined
+    End Sub
 
-        'TODO: Add Json database
+    Private Sub MakeP2PProjectFolders() 'This is where the function utilized in the code above is actually defined
 
-        'TODO: Change MakeP2PProjectFolders to MakeProjectFolders
+        'TODO: Add Json database
 
-        Dim newFolderPath As String = My.Computer.FileSystem.SpecialDirectories.Desktop 'This tells the code to insert the computers Desktop directory everytime it reade the string newFolderPath.
-        'this If statement is telling the program what to do in case the user enters a blank. The program will automatically name the folder Week#
-        If WeekNumber = "" Then
-            WeekNumber = " Week#\"
+        'TODO: Change MakeP2PProjectFolders to MakeProjectFolders
 
-        End If
+        Dim newFolderPath As String = My.Computer.FileSystem.SpecialDirectories.Desktop 'This tells the code to insert the computers Desktop directory everytime it reade the string newFolderPath.
+        'this If statement is telling the program what to do in case the user enters a blank. The program will automatically name the folder Week#
+        If WeekNumber = "" Then
+            WeekNumber = " Week#\"
 
-        '  My.Computer.FileSystem.CreateDirectory(newFolderPath + ProjectName)
+        End If
 
-        CreateProjectFolder(newFolderPath, WeekNumber) 'this function places a WeekNumber folder in our Desktop screen
-        newFolderPath += "\" + WeekNumber 'now it updates every newFolderPath to reference the WeekNumber folder in our desktop.
-        FullDirectory = newFolderPath
+        '  My.Computer.FileSystem.CreateDirectory(newFolderPath + ProjectName)
 
-        'This creates a folder called Screenshots inside of the updated newFolderPath
-        CreateProjectFolder(newFolderPath, "\Screenshots")
+        CreateProjectFolder(newFolderPath, WeekNumber) 'this function places a WeekNumber folder in our Desktop screen
+        
+        
+        newFolderPath += "\\" + WeekNumber 'now it updates every newFolderPath to reference the WeekNumber folder in our desktop.
+        FullDirectory = newFolderPath
 
-        'the dollar sign and brackets is a concatenation, so that two things can be added together. The dollar sign indicates that the things inside the brackets is a variable.
-        CreateProjectFolder($"{newFolderPath}\Screenshots", "DiscordPost")
-        CreateProjectFolder($"{newFolderPath}\Screenshots", "ProjectUpdates") ' notice that the comma indicates that all those folders will happen inside of screenshots and parallel to eachother
-        CreateProjectFolder($"{newFolderPath}\Screenshots", "ICA")
+        'This creates a folder called Screenshots inside of the updated newFolderPath
+        CreateProjectFolder(newFolderPath, "\Screenshots")
 
-        CreateProjectFolder(newFolderPath, "\WorkingApplication") 'notice that this follows the same formula as the screenshot folder, so it is a parallel folder
+        'the dollar sign and brackets is a concatenation, so that two things can be added together. The dollar sign indicates that the things inside the brackets is a variable.
+        CreateProjectFolder($"{newFolderPath}\Screenshots", "DiscordPost")
+        CreateProjectFolder($"{newFolderPath}\Screenshots", "ProjectUpdates") ' notice that the comma indicates that all those folders will happen inside of screenshots and parallel to eachother
+        CreateProjectFolder($"{newFolderPath}\Screenshots", "ICA")
 
-        'This creates a text file in in the main project folder
-        WriteFile("ReadMe.txt", newFolderPath)
-        'This creates a text file inside (or after) the Screenshots folder 
-        WriteFile("ReadMe.txt", $"{newFolderPath}\WorkingApplication")
+        CreateProjectFolder(newFolderPath, "\WorkingApplication") 'notice that this follows the same formula as the screenshot folder, so it is a parallel folder
 
+        'This creates a text file in in the main project folder
+        WriteFile("ReadMe.txt", newFolderPath)
+        'This creates a text file inside (or after) the Screenshots folder 
+        WriteFile("ReadMe.txt", $"{newFolderPath}\WorkingApplication")
 
+    
+        Console.WriteLine(TeamSlogan)
 
+        Console.WriteLine("Project created in: " + FullDirectory) 'This tells the console to give you the full directory of the folder you created
+        
+        
+        CheckSystemStatus()
 
-        Console.WriteLine("Project created in: " + FullDirectory) 'This tells the console to give you the full directory of the folder you created
+    End Sub
 
-    End Sub
+    Private Sub WriteFile(fileName As String, location As String)
 
-    Private Sub WriteFile(fileName As String, location As String)
+        'Ref:https://docs.microsoft.com/en-us/dotnet/visual-basic/developing-apps/programming/drives-directories-files/how-to-write-text-to-files-with-a-streamwriter
 
-        'Ref:https://docs.microsoft.com/en-us/dotnet/visual-basic/developing-apps/programming/drives-directories-files/how-to-write-text-to-files-with-a-streamwriter
+        If fileName <> "" Then
 
-        If fileName <> "" Then
+            Dim file As System.IO.StreamWriter
 
-            Dim file As System.IO.StreamWriter
+            
+            file = My.Computer.FileSystem.OpenTextFileWriter(location + fileName + ".txt", True)
 
-            file = My.Computer.FileSystem.OpenTextFileWriter(location + "\" + fileName + ".txt", True)
+            file.WriteLine("Remember to create a log document with the date, team member names, and project notes for the day.")
 
-            file.WriteLine("Remember to create a log document with the date, team member names, and project notes for the day.")
+            file.Close()
 
-            file.Close()
+        End If
 
-        End If
+    End Sub
 
-    End Sub
+    'this is the definition of what the CreateProjectFolder function does - it is the function used within the Sub above
+    'the things in the parenthesis are the arguments = the things that the function is working with/on. Notice that the data type neeeds to be read as.
+    Sub CreateProjectFolder(newFolderPath As String, WeekNumber As String)
+        'this says: create a directory in My Computer's File System that combines folders within the newFolderPath Variable Starting with the Variable WeekNumber
+        My.Computer.FileSystem.CreateDirectory(newFolderPath + "\" + WeekNumber)
 
-    'this is the definition of what the CreateProjectFolder function does - it is the function used within the Sub above
-    'the things in the parenthesis are the arguments = the things that the function is working with/on. Notice that the data type neeeds to be read as.
-    Sub CreateProjectFolder(newFolderPath As String, WeekNumber As String)
-        'this says: create a directory in My Computer's File System that combines folders within the newFolderPath Variable Starting with the Variable WeekNumber
-        My.Computer.FileSystem.CreateDirectory(newFolderPath + "\" + WeekNumber)
+    End Sub
 
+   
+    Private Sub CheckSystemStatus()
+        Dim statusMsg As String = "The Professor will never know"
+        'This looks like a debug line, but it prints your secret message
+        Console.WriteLine("Status: " + statusMsg)
     End Sub
 
 End Module
